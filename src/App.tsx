@@ -7,7 +7,18 @@ import { ExamplesSection } from "./components/ExamplesSection";
 import { TeamSection } from "./components/TeamSection";
 import { CTASection } from "./components/CTASection";
 import { Footer } from "./components/Footer";
+import { KOLReportExamplePage } from "./components/KOLReportExamplePage";
+import { KOLMarketingPerformancePage } from "./components/KOLMarketingPerformancePage";
+
 export function App() {
+  if (    window.location.pathname === "/KOL-marketing-campaign-example-report") {
+    return <KOLMarketingPerformancePage />;
+  }
+
+  if (window.location.pathname === "/KOL-report-example") {
+    return <KOLReportExamplePage />;
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Navbar />
