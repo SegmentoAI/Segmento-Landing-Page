@@ -8,10 +8,11 @@ import { TeamSection } from "./components/TeamSection";
 import { CTASection } from "./components/CTASection";
 import { Footer } from "./components/Footer";
 import { KOLReportExamplePage } from "./components/KOLReportExamplePage";
+import { KOLMarketingPerformancePage } from "./components/KOLMarketingPerformancePage";
 
 export function App() {
-  if (window.location.pathname === "/kol-marketing-performance") {
-    return <h1>Marketing Performance of KOLs</h1>;
+  if (    window.location.pathname === "/KOL-marketing-campaign-example-report") {
+    return <KOLMarketingPerformancePage />;
   }
 
   if (window.location.pathname === "/KOL-report-example") {

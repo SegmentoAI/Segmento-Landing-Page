@@ -8,6 +8,7 @@ type SplitItem = {
   label: string;
   value: number;
   color: string;
+  textColor: string;
 };
 
 const reportDate = "January 10, 2026";
@@ -42,19 +43,29 @@ const combinedMonthlyVolume = tradedVolumeDistribution.reduce(
 );
 
 const netWorthByChain: SplitItem[] = [
-  { label: "Solana", value: 2_840_000, color: "bg-green-600" },
-  { label: "ETH", value: 2_310_000, color: "bg-emerald-500" },
-  { label: "Arbitrum", value: 1_360_000, color: "bg-lime-500" },
-  { label: "Base", value: 1_020_000, color: "bg-yellow-500" },
-  { label: "Others", value: 821_000, color: "bg-gray-400" },
+  {
+    label: "Solana",
+    value: 2_840_000,
+    color: "bg-green-600",
+    textColor: "text-green-700",
+  },
+  { label: "ETH", value: 2_310_000, color: "bg-emerald-500", textColor: "text-emerald-700" },
+  { label: "Arbitrum", value: 1_360_000, color: "bg-lime-500", textColor: "text-lime-700" },
+  { label: "Base", value: 1_020_000, color: "bg-yellow-500", textColor: "text-yellow-700" },
+  { label: "Others", value: 821_000, color: "bg-gray-400", textColor: "text-gray-700" },
 ];
 
 const volumeByChain: SplitItem[] = [
-  { label: "Solana", value: 5_662_000, color: "bg-green-600" },
-  { label: "ETH", value: 4_481_000, color: "bg-emerald-500" },
-  { label: "Arbitrum", value: 2_507_000, color: "bg-lime-500" },
-  { label: "Base", value: 1_886_000, color: "bg-yellow-500" },
-  { label: "Others", value: 1_189_800, color: "bg-gray-400" },
+  {
+    label: "Solana",
+    value: 5_662_000,
+    color: "bg-green-600",
+    textColor: "text-green-700",
+  },
+  { label: "ETH", value: 4_481_000, color: "bg-emerald-500", textColor: "text-emerald-700" },
+  { label: "Arbitrum", value: 2_507_000, color: "bg-lime-500", textColor: "text-lime-700" },
+  { label: "Base", value: 1_886_000, color: "bg-yellow-500", textColor: "text-yellow-700" },
+  { label: "Others", value: 1_189_800, color: "bg-gray-400", textColor: "text-gray-700" },
 ];
 
 function buildScaledSeries(
@@ -226,8 +237,8 @@ function SplitBar({ items, total }: { items: SplitItem[]; total: number }) {
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-2">
         {items.map((item) => (
-          <div key={item.label} className="text-sm text-gray-700">
-            <span className="font-semibold text-gray-900">{item.label}:</span>{" "}
+          <div key={item.label} className={`text-sm ${item.textColor}`}>
+            <span className="font-semibold">{item.label}:</span>{" "}
             {formatCurrency(item.value)}
           </div>
         ))}
@@ -244,13 +255,22 @@ export function KOLReportExamplePage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 relative">
+      <button
+        type="button"
+        onClick={() => window.print()}
+        className="fixed top-4 right-4 z-10 bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg shadow-sm print:hidden"
+      >
+        Generate PDF
+      </button>
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
         <section className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
-          <p className="text-sm font-medium text-green-700">Segmento Report</p>
-          <h1 className="mt-2 text-3xl sm:text-4xl font-extrabold text-gray-900">
-            KOL Report Example
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-green-700">
+            Segmento Single KOL Report
           </h1>
+          <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-gray-900">
+            KOL Report for: @ExamleKOL
+          </h2>
           <p className="mt-3 text-gray-600">
             Campaign tracked from click-through link published on {reportDate}.
             Medium-sized KOL audience with 3,840 tracked clicks.

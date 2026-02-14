@@ -62,6 +62,12 @@ export const ExamplesSection = () => {
                   campaign and referral program. The program was successful but also costly.
                 </p>
                 <p className="mt-2 text-gray-600">
+                  <span className="font-medium">Sources:</span>{" "}
+                  <a href="/KOL-marketing-campaign-example-report" className="underline">
+                    Example report
+                  </a>
+                </p>
+                <p className="mt-2 text-gray-600">
                   <span className="font-medium">Impact:</span> The protocol is growing but is not able to
                   afford the same marketing budget in the future. The protocol needs to optimize
                   who they reward to maximize growth with reasonable cost.
