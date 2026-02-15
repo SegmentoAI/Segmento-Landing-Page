@@ -9,14 +9,19 @@ import { CTASection } from "./components/CTASection";
 import { Footer } from "./components/Footer";
 import { KOLReportExamplePage } from "./components/KOLReportExamplePage";
 import { KOLMarketingPerformancePage } from "./components/KOLMarketingPerformancePage";
+import { ProtocolValueExampleReportPage } from "./components/ProtocolValueExampleReportPage";
 
 export function App() {
-  if (    window.location.pathname === "/KOL-marketing-campaign-example-report") {
+  if (window.location.pathname === "/KOL-marketing-campaign-example-report") {
     return <KOLMarketingPerformancePage />;
   }
 
   if (window.location.pathname === "/KOL-report-example") {
     return <KOLReportExamplePage />;
+  }
+
+  if (window.location.pathname === "/Protocol-value-example-report") {
+    return <ProtocolValueExampleReportPage />;
   }
 
   return (
