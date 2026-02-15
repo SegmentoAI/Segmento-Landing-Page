@@ -10,6 +10,7 @@ import { Footer } from "./components/Footer";
 import { KOLReportExamplePage } from "./components/KOLReportExamplePage";
 import { KOLMarketingPerformancePage } from "./components/KOLMarketingPerformancePage";
 import { ProtocolValueExampleReportPage } from "./components/ProtocolValueExampleReportPage";
+import { FakeBankExamplePage } from "./components/FakeBankExamplePage";
 
 export function App() {
   if (window.location.pathname === "/KOL-marketing-campaign-example-report") {
@@ -18,6 +19,10 @@ export function App() {
 
   if (window.location.pathname === "/KOL-report-example") {
     return <KOLReportExamplePage />;
+  }
+
+  if (window.location.pathname === "/FakeBank-example") {
+    return <FakeBankExamplePage />;
   }
 
   if (window.location.pathname === "/Protocol-value-example-report") {
