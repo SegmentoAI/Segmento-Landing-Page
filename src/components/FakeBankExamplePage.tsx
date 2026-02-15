@@ -71,9 +71,9 @@ export function FakeBankExamplePage() {
                 </div>
                 <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
                 <img
-                  src="https://i.pravatar.cc/900?img=12"
+                  src="/images/people/person-1.png"
                   alt="Customer reviewing mortgage options"
-                  className="h-80 w-full object-cover"
+                  className="h-80 w-full object-cover object-[50%_16%]"
                 />
                 <div className="p-4 bg-white">
                   <p className="text-sm font-semibold">A better rate for modern savers</p>
@@ -140,14 +140,14 @@ export function FakeBankExamplePage() {
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 <img
-                  src="https://i.pravatar.cc/420?img=22"
+                  src="/images/people/person-2.png"
                   alt="Customer using banking app"
-                  className="h-36 w-full rounded-xl object-cover border border-slate-200"
+                  className="h-36 w-full rounded-xl object-cover object-[50%_14%] border border-slate-200"
                 />
                 <img
-                  src="https://i.pravatar.cc/420?img=41"
+                  src="/images/people/person-3.png"
                   alt="Customer planning finances"
-                  className="h-36 w-full rounded-xl object-cover border border-slate-200"
+                  className="h-36 w-full rounded-xl object-cover object-[50%_14%] border border-slate-200"
                 />
               </div>
             </div>
@@ -158,9 +158,9 @@ export function FakeBankExamplePage() {
             <div className="mt-5 grid gap-4 md:grid-cols-3">
               <article className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <img
-                  src="https://i.pravatar.cc/480?img=34"
+                  src="/images/people/person-4.png"
                   alt="Young professional buying first home"
-                  className="h-40 w-full rounded-xl object-cover"
+                  className="h-72 w-full rounded-xl object-cover object-[50%_8%]"
                 />
                 <p className="mt-3 font-semibold">First-home buyer</p>
                 <p className="mt-1 text-sm text-[var(--fb-muted)]">
@@ -169,9 +169,9 @@ export function FakeBankExamplePage() {
               </article>
               <article className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <img
-                  src="https://i.pravatar.cc/480?img=49"
+                  src="/images/people/person-5.png"
                   alt="Family reviewing refinancing offer"
-                  className="h-40 w-full rounded-xl object-cover"
+                  className="h-72 w-full rounded-xl object-cover object-[50%_8%]"
                 />
                 <p className="mt-3 font-semibold">Refinancing household</p>
                 <p className="mt-1 text-sm text-[var(--fb-muted)]">
@@ -180,9 +180,9 @@ export function FakeBankExamplePage() {
               </article>
               <article className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <img
-                  src="https://i.pravatar.cc/480?img=59"
+                  src="/images/people/person-6.png"
                   alt="Remote worker comparing mortgage plans"
-                  className="h-40 w-full rounded-xl object-cover"
+                  className="h-72 w-full rounded-xl object-cover object-[50%_8%]"
                 />
                 <p className="mt-3 font-semibold">Digital-first customer</p>
                 <p className="mt-1 text-sm text-[var(--fb-muted)]">
