@@ -18,8 +18,9 @@ type DumpRiskRow = {
 };
 
 const actualMonths = 24;
-const forecastMonths = 6;
+const forecastMonths = 5;
 const totalMonths = actualMonths + forecastMonths;
+const expectedAirdropMonthIndex = 26;
 
 const monthLabels = [
   "Mar 2024",
@@ -51,7 +52,6 @@ const monthLabels = [
   "May 2026",
   "Jun 2026",
   "Jul 2026",
-  "Aug 2026",
 ];
 
 function buildSeries(
@@ -90,6 +90,62 @@ function applyZeroFirstMonths(values: number[], zeroMonths: number) {
   return values.map((value, index) => (index < zeroMonths ? 0 : value));
 }
 
+function applySmallSlowDropAfter(
+  values: number[],
+  eventIndex: number,
+  totalDropPct: number,
+  durationMonths: number,
+) {
+  return values.map((value, index) => {
+    if (index < eventIndex) return value;
+    const progress = Math.min(1, (index - eventIndex + 1) / Math.max(1, durationMonths));
+    return Math.round(value * (1 - totalDropPct * progress));
+  });
+}
+
+function applyStepDropBeforeAndStabilize(
+  values: number[],
+  eventIndex: number,
+  stepDropPct: number,
+) {
+  const startIndex = Math.max(0, eventIndex - 1);
+  return values.map((value, index) => {
+    if (index < startIndex) return value;
+    return Math.round(value * (1 - stepDropPct));
+  });
+}
+
+function applyLargeDropAt(
+  values: number[],
+  dropIndex: number,
+  dropPct: number,
+) {
+  return values.map((value, index) => {
+    if (index < dropIndex) return value;
+    return Math.round(value * (1 - dropPct));
+  });
+}
+
+function applyPostAirdropStepDip(
+  values: number[],
+  eventIndex: number,
+  dipPct: number,
+  monthlyRecoveryPct: number,
+) {
+  const dipIndex = eventIndex + 1;
+  const adjusted = [...values];
+
+  for (let index = dipIndex; index < adjusted.length; index += 1) {
+    if (index === dipIndex) {
+      adjusted[index] = Math.round(adjusted[index] * (1 - dipPct));
+      continue;
+    }
+    adjusted[index] = Math.round(adjusted[index - 1] * (1 + monthlyRecoveryPct));
+  }
+
+  return adjusted;
+}
+
 function buildTwoPhaseSeries(
   base: number,
   earlyGrowth: number,
@@ -117,21 +173,81 @@ function buildTwoPhaseSeries(
   return values;
 }
 
-const highNetWorthDau = applyZeroFirstMonths(buildSeries(120, 8, 22, 1.4), 3);
-const midNetWorthDau = buildSeries(410, 14, 36, 1.3);
-const lowNetWorthDau = buildSeries(980, 28, 65, 1.2);
-const highVolumeDau = applyZeroFirstMonths(buildSeries(210, 11, 27, 1.35), 3);
-const midLowVolumeDau = buildSeries(890, 24, 54, 1.2);
-const airdropFarmersDau = buildSeries(640, 4, 45, 1.05);
-const airdropHoldersDau = buildSeries(180, 13, 23, 1.45);
+const highNetWorthBase = applyZeroFirstMonths(buildSeries(120, 8, 22, 1.4), 3);
+const midNetWorthBase = buildSeries(410, 14, 36, 1.3);
+const lowNetWorthBase = buildSeries(980, 28, 65, 1.2);
+const highVolumeBase = applyZeroFirstMonths(buildSeries(210, 11, 27, 1.35), 3);
+const midLowVolumeBase = buildSeries(890, 24, 54, 1.2);
+const airdropFarmersBase = buildSeries(640, 4, 45, 1.05);
+const airdropHoldersBase = buildSeries(180, 13, 23, 1.45);
 
-const highNetWorthMau = toMau(highNetWorthDau, 8.6);
-const midNetWorthMau = toMau(midNetWorthDau, 9.2);
-const lowNetWorthMau = toMau(lowNetWorthDau, 9.8);
-const highVolumeMau = toMau(highVolumeDau, 8.9);
-const midLowVolumeMau = toMau(midLowVolumeDau, 9.5);
-const airdropFarmersMau = toMau(airdropFarmersDau, 7.6);
-const airdropHoldersMau = toMau(airdropHoldersDau, 8.7);
+const highNetWorthDau = applySmallSlowDropAfter(
+  highNetWorthBase,
+  expectedAirdropMonthIndex,
+  0.16,
+  4,
+);
+const midNetWorthDau = applyStepDropBeforeAndStabilize(
+  midNetWorthBase,
+  expectedAirdropMonthIndex + 1,
+  0.09,
+);
+const lowNetWorthDau = applyStepDropBeforeAndStabilize(
+  lowNetWorthBase,
+  expectedAirdropMonthIndex + 1,
+  0.07,
+);
+const highVolumeDau = applySmallSlowDropAfter(
+  highVolumeBase,
+  expectedAirdropMonthIndex,
+  0.14,
+  4,
+);
+const midLowVolumeDau = applyStepDropBeforeAndStabilize(
+  midLowVolumeBase,
+  expectedAirdropMonthIndex + 1,
+  0.1,
+);
+const airdropFarmersDau = applyLargeDropAt(
+  airdropFarmersBase,
+  expectedAirdropMonthIndex,
+  0.9,
+);
+const airdropHoldersDau = airdropHoldersBase;
+
+const highNetWorthMau = applySmallSlowDropAfter(
+  toMau(highNetWorthBase, 8.6),
+  expectedAirdropMonthIndex + 1,
+  0.12,
+  3,
+);
+const midNetWorthMau = applyStepDropBeforeAndStabilize(
+  toMau(midNetWorthBase, 9.2),
+  expectedAirdropMonthIndex + 3,
+  0.07,
+);
+const lowNetWorthMau = applyStepDropBeforeAndStabilize(
+  toMau(lowNetWorthBase, 9.8),
+  expectedAirdropMonthIndex + 3,
+  0.06,
+);
+const highVolumeMau = applySmallSlowDropAfter(
+  toMau(highVolumeBase, 8.9),
+  expectedAirdropMonthIndex + 1,
+  0.12,
+  3,
+);
+const midLowVolumeMau = applyStepDropBeforeAndStabilize(
+  toMau(midLowVolumeBase, 9.5),
+  expectedAirdropMonthIndex + 3,
+  0.08,
+);
+const airdropFarmersMau = applyLargeDropAt(
+  toMau(airdropFarmersBase, 7.6),
+  expectedAirdropMonthIndex + 1,
+  0.9,
+);
+const airdropHoldersMau = toMau(airdropHoldersBase, 8.7);
 
 const dauSeries: Series[] = [
   { label: "High net worth individuals", color: "#2563eb", values: highNetWorthDau },
@@ -153,21 +269,17 @@ const mauSeries: Series[] = [
   { label: "Airdrop holders", color: "#0f766e", values: airdropHoldersMau },
 ];
 
-const combinedMauNetWorth = buildTwoPhaseSeries(
-  2_800_000,
-  92_000,
-  355_000,
-  12,
-  190_000,
-  1.2,
+const combinedMauNetWorth = applyPostAirdropStepDip(
+  buildTwoPhaseSeries(2_800_000, 92_000, 355_000, 12, 190_000, 1.2),
+  expectedAirdropMonthIndex,
+  0.14,
+  0.03,
 );
-const combinedMauMonthlyVolume = buildTwoPhaseSeries(
-  18_000_000,
-  430_000,
-  1_880_000,
-  12,
-  1_350_000,
-  1.2,
+const combinedMauMonthlyVolume = applyPostAirdropStepDip(
+  buildTwoPhaseSeries(18_000_000, 430_000, 1_880_000, 12, 1_350_000, 1.2),
+  expectedAirdropMonthIndex,
+  0.24,
+  0.045,
 );
 
 const dumpRiskRows: DumpRiskRow[] = [
@@ -281,6 +393,7 @@ function ForecastChart({
   const padding = 36;
   const pointCount = monthLabels.length;
   const forecastStartIndex = actualMonths - 1;
+  const expectedAirdropIndex = expectedAirdropMonthIndex;
 
   const visibleSeries = series.filter((line) => !hiddenLabels.includes(line.label));
   const plottedSeries = visibleSeries.length > 0 ? visibleSeries : series;
@@ -290,15 +403,29 @@ function ForecastChart({
   const max = Math.max(...allValues);
   const range = max - min || 1;
 
+  const plotWidth = width - padding * 2;
+  const splitX = padding + plotWidth * 0.5;
+  const actualSpan = actualMonths - 1;
+  const forecastSpan = pointCount - actualMonths;
+
+  const getX = (index: number) => {
+    if (index <= forecastStartIndex) {
+      const ratio = actualSpan === 0 ? 0 : index / actualSpan;
+      return padding + ratio * (plotWidth * 0.5);
+    }
+    const ratio = forecastSpan === 0 ? 0 : (index - forecastStartIndex) / forecastSpan;
+    return splitX + ratio * (plotWidth * 0.5);
+  };
+
   const getPoints = (values: number[]) =>
     values.map((value, index) => {
-      const x = padding + (index * (width - padding * 2)) / (pointCount - 1);
+      const x = getX(index);
       const y = height - padding - ((value - min) * (height - padding * 2)) / range;
       return { x, y };
     });
 
-  const forecastStartX =
-    padding + (forecastStartIndex * (width - padding * 2)) / (pointCount - 1);
+  const forecastStartX = splitX;
+  const expectedAirdropX = splitX + (width - padding - splitX) * 0.5;
 
   return (
     <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
@@ -307,12 +434,12 @@ function ForecastChart({
 
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-72 mt-4">
         <rect
-          x={forecastStartX}
+          x={splitX}
           y={padding}
-          width={width - padding - forecastStartX}
+          width={width - padding - splitX}
           height={height - padding * 2}
           fill="#fef3c7"
-          opacity="0.35"
+          opacity="0.2"
         />
         <line
           x1={padding}
@@ -336,10 +463,23 @@ function ForecastChart({
           className="stroke-yellow-600"
           strokeDasharray="6 6"
         />
+        <line
+          x1={expectedAirdropX}
+          y1={padding}
+          x2={expectedAirdropX}
+          y2={height - padding}
+          className="stroke-orange-600"
+          strokeDasharray="4 5"
+        />
         {plottedSeries.map((line) => {
           const points = getPoints(line.values);
           const actualPath = buildSmoothPath(points.slice(0, actualMonths));
-          const forecastPath = buildSmoothPath(points.slice(forecastStartIndex));
+          const preAirdropForecastPath = buildSmoothPath(
+            points.slice(forecastStartIndex, expectedAirdropIndex + 1),
+          );
+          const postAirdropForecastPath = buildSmoothPath(
+            points.slice(expectedAirdropIndex, pointCount),
+          );
 
           return (
             <g key={line.label}>
@@ -352,7 +492,7 @@ function ForecastChart({
                 strokeLinejoin="round"
               />
               <path
-                d={forecastPath}
+                d={preAirdropForecastPath}
                 fill="none"
                 stroke={line.color}
                 strokeWidth="3"
@@ -360,15 +500,39 @@ function ForecastChart({
                 strokeLinejoin="round"
                 strokeDasharray="8 7"
               />
+              <path
+                d={postAirdropForecastPath}
+                fill="none"
+                stroke={line.color}
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeDasharray="2 7"
+              />
             </g>
           );
         })}
       </svg>
 
-      <div className="mt-3 flex items-center justify-between text-xs text-gray-500">
-        <span>{monthLabels[0]}</span>
-        <span className="text-yellow-700 font-semibold">Forecast starts (Mar 2026)</span>
-        <span>{monthLabels[monthLabels.length - 1]}</span>
+      <div className="mt-3 relative h-5 text-xs text-gray-500">
+        <span
+          className="absolute -translate-x-1/2"
+          style={{ left: `${(padding / width) * 100}%` }}
+        >
+          {monthLabels[0]}
+        </span>
+        <span
+          className="absolute -translate-x-1/2 text-yellow-700 font-semibold"
+          style={{ left: `${(forecastStartX / width) * 100}%` }}
+        >
+          Today (Feb 15, 2026)
+        </span>
+        <span
+          className="absolute -translate-x-1/2 text-orange-700 font-semibold"
+          style={{ left: `${(expectedAirdropX / width) * 100}%` }}
+        >
+          Expected airdrop
+        </span>
       </div>
 
       <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-2 text-sm">
