@@ -12,21 +12,36 @@ import { KOLMarketingPerformancePage } from "./components/KOLMarketingPerformanc
 import { ProtocolValueExampleReportPage } from "./components/ProtocolValueExampleReportPage";
 import { FakeBankExamplePage } from "./components/FakeBankExamplePage";
 
+const pages = {
+  KOLMarketingPerformancePage:
+    "KOL-marketing-campaign-example-report".toLowerCase(),
+  KOLReportExamplePage: "KOL-report-example".toLowerCase(),
+  FakeBankExamplePage: "FakeBank-example".toLowerCase(),
+  ProtocolValueExampleReportPage: "Protocol-value-example-report".toLowerCase(),
+};
+
 export function App() {
-  if (window.location.pathname === "/KOL-marketing-campaign-example-report") {
-    return <KOLMarketingPerformancePage />;
-  }
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get("p");
 
-  if (window.location.pathname === "/KOL-report-example") {
-    return <KOLReportExamplePage />;
-  }
+  if (page !== null) {
+    const lowerCase = page.toLowerCase();
 
-  if (window.location.pathname === "/FakeBank-example") {
-    return <FakeBankExamplePage />;
-  }
+    if (lowerCase === pages.KOLMarketingPerformancePage) {
+      return <KOLMarketingPerformancePage />;
+    }
 
-  if (window.location.pathname === "/Protocol-value-example-report") {
-    return <ProtocolValueExampleReportPage />;
+    if (lowerCase === pages.KOLReportExamplePage) {
+      return <KOLReportExamplePage />;
+    }
+
+    if (lowerCase === pages.FakeBankExamplePage) {
+      return <FakeBankExamplePage />;
+    }
+
+    if (lowerCase === pages.ProtocolValueExampleReportPage) {
+      return <ProtocolValueExampleReportPage />;
+    }
   }
 
   return (
