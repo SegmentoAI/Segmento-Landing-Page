@@ -5,13 +5,12 @@ export const HeroSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight">
-            <span className="block">Know Your Users</span>
-            <span className="block text-blue-600 mt-2">On-Chain</span>
+            <span className="block">Get ROI for $ spent on KOLs</span>
           </h1>
           <p className="mt-6 text-xl text-gray-700 max-w-3xl mx-auto">
-            Segmento monitors and classifies user multi-chain
-            behaviour. Segmento provides aggregate and user-level insights into
-            the past and expected behavior of users.
+            Segmento connects acquisition tracking with on-chain behavior, so
+            teams can see which KOLs drive valuable users instead of just raw
+            traffic.
           </p>
           <div className="mt-10 flex justify-center">
             <a

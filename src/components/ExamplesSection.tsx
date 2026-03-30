@@ -5,9 +5,36 @@ export const ExamplesSection = () => {
   return (
     <section id="examples" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="max-w-7xl mx-auto">
+        <div className="mb-16">
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              How it works
+            </h2>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              "Contact us to define your tracking setup and reporting goals.",
+              "Set up your Segmento account.",
+              "Add a lightweight snippet to your website to track incoming traffic sources.",
+              "Generate unique links for each KOL campaign.",
+              "Segmento monitors the traffic and maps users to their acquisition source.",
+              "Receive reports on in-protocol activity and user value, including metrics such as net worth and activity on other protocols.",
+            ].map((step, index) => (
+              <div
+                key={step}
+                className="bg-white p-6 rounded-lg shadow-md border border-gray-100"
+              >
+                <p className="text-sm font-semibold text-blue-600">
+                  Step {index + 1}
+                </p>
+                <p className="mt-2 text-gray-700">{step}</p>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="text-center mb-16">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            Real-World Examples
+            Additional Real-World Examples
           </h2>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
             See how Segmento solves critical problems for protocols in the real
