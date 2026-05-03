@@ -3,7 +3,6 @@ import { HeroSection } from "./components/HeroSection";
 import { WhereWeHelpSection } from "./components/WhereWeHelpSection";
 import { SolutionSection } from "./components/SolutionSection";
 import { HowWeHelpSection } from "./components/HowWeHelpSection";
-import { ExamplesSection } from "./components/ExamplesSection";
 import { TeamSection } from "./components/TeamSection";
 import { CTASection } from "./components/CTASection";
 import { Footer } from "./components/Footer";
@@ -16,28 +15,16 @@ import { getPageVariant, PAGES } from "./navigation";
 export function App() {
   const page = getPageVariant();
 
-  if (page === PAGES.KOLMarketingPerformancePage) {
-    return <KOLMarketingPerformancePage />;
-  }
-
-  if (page === PAGES.KOLReportExamplePage) {
-    return <KOLReportExamplePage />;
-  }
-
-  if (page === PAGES.FakeBankExamplePage) {
-    return <FakeBankExamplePage />;
-  }
-
-  if (page === PAGES.ProtocolValueExampleReportPage) {
-    return <ProtocolValueExampleReportPage />;
-  }
+  if (page === PAGES.KOLMarketingPerformancePage) return <KOLMarketingPerformancePage />;
+  if (page === PAGES.KOLReportExamplePage) return <KOLReportExamplePage />;
+  if (page === PAGES.FakeBankExamplePage) return <FakeBankExamplePage />;
+  if (page === PAGES.ProtocolValueExampleReportPage) return <ProtocolValueExampleReportPage />;
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0a0f1e]">
       <Navbar />
-      <main className="flex-grow">
+      <main>
         <HeroSection />
-        <ExamplesSection />
         <WhereWeHelpSection />
         <SolutionSection />
         <HowWeHelpSection />
