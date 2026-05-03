@@ -1,52 +1,57 @@
-import { CheckCircleIcon } from "lucide-react";
+const KOL_POINTS = [
+  "Get your own KOL impact dashboard with real attribution data",
+  "Build a portfolio of verified on-chain case studies",
+  "Stand out to projects that pay for results, not promises",
+  "Earn performance bonuses tied to real fees and TVL",
+];
 
-const HowWeHelpItem = ({ title, text }: { title: string; text: string }) => (
-  <div className="relative">
-    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg transform skew-y-0 -rotate-3 rounded-3xl"></div>
-    <div className="relative bg-white p-6 rounded-lg shadow-md border border-gray-100 h-full">
-      <div className="flex items-center mb-4">
-        <CheckCircleIcon className="h-6 w-6 text-blue-600 mr-2" />
-        <h3 className="text-lg font-medium text-gray-900">{title}</h3>
-      </div>
-      <p className="text-gray-600">{text}</p>
-    </div>
-  </div>
-);
+const KOL_REPORT_ROWS = [
+  { label: "Campaign", value: "Protocol X · Apr 2026", color: "" },
+  { label: "Users acquired", value: "720 real users", color: "text-emerald-400" },
+  { label: "Farmers filtered", value: "24.2% removed", color: "text-red-400" },
+  { label: "TVL generated", value: "$8.35M", color: "text-emerald-400" },
+  { label: "Fees collected", value: "$42,800", color: "text-emerald-400" },
+  { label: "Avg user net worth", value: "$11,500", color: "text-violet-300" },
+];
 
 export const HowWeHelpSection = () => {
   return (
-    <section id="impact" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            How We Help
+    <section id="for-kols" className="bg-[#080d1a] py-24 px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-purple-400 mb-4">For KOLs</div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-50 leading-tight mb-5">
+            Prove your real impact.{" "}
+            <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+              Earn what you're worth.
+            </span>
           </h2>
-          <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-            Segmento delivers tangible benefits to protocols, foundations, and
-            the broader ecosystem.
+          <p className="text-slate-500 text-base leading-relaxed mb-8 max-w-md">
+            Anyone can claim followers and impressions. Segmento gives you verified on-chain case studies that show
+            exactly what you delivered — so you can command better deals and build a reputation that compounds.
           </p>
+          <ul className="space-y-4">
+            {KOL_POINTS.map((point) => (
+              <li key={point} className="flex items-start gap-3 text-slate-400 text-sm leading-relaxed">
+                <span className="text-purple-400 font-bold flex-shrink-0 mt-0.5">→</span>
+                {point}
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          <HowWeHelpItem
-            title="Ecosystem Growth"
-            text="By providing accurate user data and enabling better resource allocation, Segmento contributes to the sustainable growth of the entire blockchain ecosystem."
-          />
-          <HowWeHelpItem
-            title="Accurate Metrics"
-            text="Provides reliable metrics (Real DAU, Genuine users, Airdrop Hunters, Sybils, Whales) for foundations and protocols, enabling data-driven decision making."
-          />
-          <HowWeHelpItem
-            title="Reduced Wastage"
-            text="Reduces incentive wastage by identifying not performing KOLs or sybil-driven growth early, allowing protocols to adjust strategies before resources are depleted."
-          />
-          <HowWeHelpItem
-            title="Retention Insights"
-            text="Equips protocol teams with retention and migration insights to fine-tune campaigns and improve user retention strategies."
-          />
-          <HowWeHelpItem
-            title="Targeted Marketing"
-            text="Allows targeted marketing via identification of value users for protocols. Instantly identify a visitor's on-chain profile to serve them customized messaging."
-          />
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-7">
+          <div className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 mb-5">
+            KOL Report — @alpha.eth
+          </div>
+          {KOL_REPORT_ROWS.map((row, i) => (
+            <div
+              key={row.label}
+              className={`flex justify-between items-center py-3 ${i < KOL_REPORT_ROWS.length - 1 ? "border-b border-slate-800" : ""}`}
+            >
+              <span className="text-sm text-slate-500">{row.label}</span>
+              <span className={`text-sm font-bold ${row.color || "text-slate-200"}`}>{row.value}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
