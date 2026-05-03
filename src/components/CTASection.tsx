@@ -1,32 +1,31 @@
-import { CalendarIcon } from "lucide-react";
+const DEMO_URL = "https://calendly.com/marek-hauzr/segmento";
+
 export const CTASection = () => {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-500 to-purple-600">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-            Ready to Get Started?
-          </h2>
-          <p className="mt-4 text-xl text-blue-100 max-w-3xl mx-auto">
-            Book a demo to see how Segmento can transform your protocol's
-            understanding of user behavior and optimize your growth strategies.
-          </p>
-          <div className="mt-10">
-            <a
-              href="https://calendly.com/marek-hauzr/segmento"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 md:text-lg md:px-10 shadow-lg"
-            >
-              <CalendarIcon className="mr-2 h-5 w-5" />
-              Schedule a Demo Call
-            </a>
-          </div>
-          <p className="mt-6 text-blue-100">
-            Our team will walk you through Segmento's capabilities and discuss
-            how it can be tailored to your specific needs.
-          </p>
-        </div>
+    <section id="cta" className="py-24 px-6 lg:px-8">
+      <div className="max-w-2xl mx-auto text-center">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-300 mb-4">Get started</div>
+        <h2 className="text-3xl sm:text-4xl font-bold text-slate-50 leading-tight mb-5">
+          Run your next campaign
+          <br />
+          based on{" "}
+          <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            data you can trust.
+          </span>
+        </h2>
+        <p className="text-slate-500 text-lg leading-relaxed mb-10">
+          Segmento is live. One new project onboards every week.
+          <br />
+          Let's make yours next.
+        </p>
+        <a
+          href={DEMO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-gradient-to-r from-blue-500 to-violet-700 text-white px-9 py-4 rounded-xl text-base font-semibold"
+        >
+          Book a Demo
+        </a>
       </div>
     </section>
   );
