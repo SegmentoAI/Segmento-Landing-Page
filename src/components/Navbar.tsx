@@ -1,124 +1,65 @@
 import { useState } from "react";
 import { MenuIcon, XIcon } from "lucide-react";
+
+const DEMO_URL = "https://calendly.com/marek-hauzr/segmento";
+
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Segmento
-              </span>
-            </div>
-          </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
-            <a
-              href="#problem"
-              className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-            >
-              Problem
+    <nav className="sticky top-0 z-50 border-b border-slate-800 bg-[rgba(10,15,30,0.92)] backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <span className="text-xl font-bold tracking-[0.15em] bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            S e g m e n t o
+          </span>
+          <div className="hidden sm:flex items-center gap-8">
+            <a href="#metrics" className="text-slate-400 hover:text-slate-100 text-sm font-medium transition-colors">
+              How it works
             </a>
-            <a
-              href="#solution"
-              className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-            >
-              Solution
+            <a href="#for-kols" className="text-slate-400 hover:text-slate-100 text-sm font-medium transition-colors">
+              For KOLs
             </a>
-            <a
-              href="#impact"
-              className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-            >
-              Impact
-            </a>
-            <a
-              href="#examples"
-              className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-            >
-              Examples
-            </a>
-            <a
-              href="#team"
-              className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-            >
+            <a href="#team" className="text-slate-400 hover:text-slate-100 text-sm font-medium transition-colors">
               Team
             </a>
             <a
-              href="https://calendly.com/marek-hauzr/segmento "
+              href={DEMO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium"
+              className="bg-gradient-to-r from-blue-500 to-violet-700 text-white px-5 py-2 rounded-lg text-sm font-semibold"
             >
               Book a Demo
             </a>
           </div>
-          <div className="flex items-center sm:hidden">
-            <button
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none"
-            >
-              {isMenuOpen ? (
-                <XIcon className="h-6 w-6" />
-              ) : (
-                <MenuIcon className="h-6 w-6" />
-              )}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="sm:hidden p-2 text-slate-400 hover:text-slate-100"
+          >
+            {isMenuOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
+          </button>
         </div>
       </div>
-      {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="sm:hidden">
-          <div className="pt-2 pb-3 space-y-1">
-            <a
-              href="#problem"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Problem
-            </a>
-            <a
-              href="#solution"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Solution
-            </a>
-            <a
-              href="#impact"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Impact
-            </a>
-            <a
-              href="#examples"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Examples
-            </a>
-            <a
-              href="#team"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Team
-            </a>
-            <a
-              href="https://calendly.com/marek-hauzr/segmento "
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-3 py-2 text-base font-medium bg-blue-600 text-white hover:bg-blue-700 text-center rounded-md mx-3"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Book a Demo
-            </a>
-          </div>
+        <div className="sm:hidden bg-slate-900 border-t border-slate-800 px-6 py-4 space-y-4">
+          <a href="#metrics" onClick={() => setIsMenuOpen(false)} className="block text-slate-400 text-sm font-medium">
+            How it works
+          </a>
+          <a href="#for-kols" onClick={() => setIsMenuOpen(false)} className="block text-slate-400 text-sm font-medium">
+            For KOLs
+          </a>
+          <a href="#team" onClick={() => setIsMenuOpen(false)} className="block text-slate-400 text-sm font-medium">
+            Team
+          </a>
+          <a
+            href={DEMO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMenuOpen(false)}
+            className="block bg-gradient-to-r from-blue-500 to-violet-700 text-white px-4 py-2 rounded-lg text-sm font-semibold text-center"
+          >
+            Book a Demo
+          </a>
         </div>
       )}
     </nav>
