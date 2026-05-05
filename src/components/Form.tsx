@@ -123,8 +123,7 @@ export const Form = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-400 mb-1">
-              Project name{" "}
-              <span className="text-slate-600">(optional)</span>
+              Project name
             </label>
             <input
               type="text"
@@ -154,7 +153,7 @@ export const Form = () => {
           )}
           <button
             type="submit"
-            disabled={status === "loading" || (!email && !telegram)}
+            disabled={status === "loading" || (!email && !telegram) || !project}
             className="w-full bg-linear-to-r from-blue-500 to-violet-700 text-white px-8 py-3 rounded-xl text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {status === "loading" ? "Sending…" : "Get in Touch"}
