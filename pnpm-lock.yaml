@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@segmento/core':
-        specifier: ^0.8.1
-        version: 0.8.1
+        specifier: ^0.9.1
+        version: 0.9.1
       lucide-react:
         specifier: ^1.14.0
         version: 1.14.0(react@19.2.5)
@@ -492,8 +492,8 @@ packages:
   '@rolldown/pluginutils@1.0.0-rc.7':
     resolution: {integrity: sha512-qujRfC8sFVInYSPPMLQByRh7zhwkGFS4+tyMQ83srV1qrxL4g8E2tyxVVyxd0+8QeBM1mIk9KbWxkegRr76XzA==}
 
-  '@segmento/core@0.8.1':
-    resolution: {integrity: sha512-oG1xMBgStI1yC19vQQEwrsxM9dY5BB52+EXlfan8f9UMsWY6wmNf5nr/n0AOv8gPb6pLNSlisZzGoY8RFtpzow==}
+  '@segmento/core@0.9.1':
+    resolution: {integrity: sha512-peDOIQRxPVgEHcaA63xoh1TqFf61hNJd6srvfFIFKvWINl0mezvRR/63DiRksthvUfuQUYifta3jffgWs+VlCg==}
 
   '@tailwindcss/node@4.2.4':
     resolution: {integrity: sha512-Ai7+yQPxz3ddrDQzFfBKdHEVBg0w3Zl83jnjuwxnZOsnH9pGn93QHQtpU0p/8rYWxvbFZHneni6p1BSLK4DkGA==}
@@ -1725,7 +1725,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.0-rc.7': {}
 
-  '@segmento/core@0.8.1': {}
+  '@segmento/core@0.9.1': {}
 
   '@tailwindcss/node@4.2.4':
     dependencies:
