@@ -6,6 +6,10 @@
   color-scheme: dark;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @media print {
   html, body, * {
     -webkit-print-color-adjust: exact !important;

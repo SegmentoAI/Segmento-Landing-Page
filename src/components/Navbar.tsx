@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { MenuIcon, XIcon } from "lucide-react";
 
-const DEMO_URL = "https://calendly.com/marek-hauzr/segmento";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,9 +23,7 @@ export const Navbar = () => {
               Team
             </a>
             <a
-              href={DEMO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#cta"
               className="bg-gradient-to-r from-blue-500 to-violet-700 text-white px-5 py-2 rounded-lg text-sm font-semibold"
             >
               Book a Demo
@@ -52,9 +49,7 @@ export const Navbar = () => {
             Team
           </a>
           <a
-            href={DEMO_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#cta"
             onClick={() => setIsMenuOpen(false)}
             className="block bg-gradient-to-r from-blue-500 to-violet-700 text-white px-4 py-2 rounded-lg text-sm font-semibold text-center"
           >

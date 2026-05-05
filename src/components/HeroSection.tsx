@@ -1,4 +1,3 @@
-const DEMO_URL = "https://calendly.com/marek-hauzr/segmento";
 
 function ChatMsg({ from, text }: { from: "them" | "us"; text: string }) {
   return (
@@ -42,9 +41,7 @@ export const HeroSection = () => {
         </p>
         <div className="flex flex-wrap gap-3">
           <a
-            href={DEMO_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#cta"
             className="bg-gradient-to-r from-blue-500 to-violet-700 text-white px-7 py-3 rounded-lg text-sm font-semibold"
           >
             Book a Demo
