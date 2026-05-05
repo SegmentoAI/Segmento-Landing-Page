@@ -10,7 +10,7 @@ export const Form = () => {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
-  const handleSubmit = async (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setStatus("loading");
     const meta: Record<string, string> = {};
@@ -28,95 +28,99 @@ export const Form = () => {
     }
   };
 
+  const inputClass =
+    "w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent";
+
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-          Ready to Get Started?
-        </h2>
-        <p className="mt-4 text-xl text-blue-100 max-w-3xl mx-auto">
-          Leave your contact and we'll reach out to show you how Segmento can
-          transform your protocol's understanding of user behavior.
-        </p>
-        <div className="mt-10 max-w-md mx-auto">
-          {status === "success" ? (
-            <div className="bg-white rounded-lg px-8 py-6 shadow-lg text-blue-600 font-medium text-lg">
-              Thanks! We'll be in touch soon.
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white rounded-lg px-8 py-6 shadow-lg space-y-4"
-            >
-              <div className="text-left">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@protocol.xyz"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div className="text-left">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Telegram
-                </label>
-                <input
-                  type="text"
-                  value={telegram}
-                  onChange={(e) => setTelegram(e.target.value)}
-                  placeholder="@username"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div className="text-left">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Project name <span className="text-gray-400">(optional)</span>
-                </label>
-                <input
-                  type="text"
-                  value={project}
-                  onChange={(e) => setProject(e.target.value)}
-                  placeholder="My Protocol"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div className="text-left">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Project description{" "}
-                  <span className="text-gray-400">(optional)</span>
-                </label>
-                <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Tell us about your project…"
-                  rows={3}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                />
-              </div>
-              {status === "error" && (
-                <p className="text-red-500 text-sm">
-                  Something went wrong. Please try again.
-                </p>
-              )}
-              <button
-                type="submit"
-                disabled={status === "loading" || (!email && !telegram)}
-                className="w-full inline-flex justify-center items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed shadow"
-              >
-                {status === "loading" ? "Sending…" : "Get in Touch"}
-              </button>
-            </form>
-          )}
-        </div>
-        <p className="mt-6 text-blue-100">
-          Our team will walk you through Segmento's capabilities and discuss how
-          it can be tailored to your specific needs.
-        </p>
+    <div className="max-w-lg mx-auto text-center">
+      <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-300 mb-4">
+        Get started
       </div>
+      <h2 className="text-3xl sm:text-4xl font-bold text-slate-50 leading-tight mb-5">
+        Run your next campaign
+        <br />
+        based on{" "}
+        <span className="bg-linear-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+          data you can trust.
+        </span>
+      </h2>
+      <p className="text-slate-500 text-lg leading-relaxed mb-10">
+        Leave your contact and we'll reach out to show how Segmento can
+        transform your protocol's understanding of user behavior.
+      </p>
+
+      {status === "success" ? (
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl px-8 py-8 text-emerald-400 font-medium text-lg">
+          Thanks! We'll be in touch soon.
+        </div>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="bg-slate-900 border border-slate-800 rounded-2xl px-8 py-8 space-y-4 text-left"
+        >
+          <div>
+            <label className="block text-sm font-medium text-slate-400 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@protocol.xyz"
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-400 mb-1">
+              Telegram
+            </label>
+            <input
+              type="text"
+              value={telegram}
+              onChange={(e) => setTelegram(e.target.value)}
+              placeholder="@username"
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-400 mb-1">
+              Project name <span className="text-slate-600">(optional)</span>
+            </label>
+            <input
+              type="text"
+              value={project}
+              onChange={(e) => setProject(e.target.value)}
+              placeholder="My Protocol"
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-400 mb-1">
+              Project description{" "}
+              <span className="text-slate-600">(optional)</span>
+            </label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Tell us about your project…"
+              rows={3}
+              className={`${inputClass} resize-none`}
+            />
+          </div>
+          {status === "error" && (
+            <p className="text-red-400 text-sm">
+              Something went wrong. Please try again.
+            </p>
+          )}
+          <button
+            type="submit"
+            disabled={status === "loading" || (!email && !telegram)}
+            className="w-full bg-linear-to-r from-blue-500 to-violet-700 text-white px-8 py-3 rounded-xl text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {status === "loading" ? "Sending…" : "Get in Touch"}
+          </button>
+        </form>
+      )}
     </div>
   );
 };
