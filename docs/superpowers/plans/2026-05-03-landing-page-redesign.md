@@ -665,7 +665,7 @@ const TEAM = [
     role: "CEO & Founder",
     bio: "Background in data-driven product development, DeFi, and technical leadership. Founded Segmento after experiencing the KOL attribution problem firsthand.",
     img: "/assets/marek.jpeg",
-    linkedin: "https://www.linkedin.com/in/marek-hauzr/",
+    linkedin: "https://www.linkedin.com/in/marek-hauzr-8016077b/",
     github: "https://github.com/MarekHauzr",
   },
   {
