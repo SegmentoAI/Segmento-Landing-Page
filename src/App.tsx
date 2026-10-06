@@ -31,7 +31,7 @@ export function App() {
     return <ProtocolValueExampleReportPage />;
 
   return (
-    <div className="min-h-screen bg-[#0a0f1e]">
+    <div className="min-h-screen bg-ink text-paper font-sans">
       <Navbar />
       <main>
         <HeroSection />

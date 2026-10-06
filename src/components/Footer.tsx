@@ -1,17 +1,30 @@
+import { Logo } from "./ui";
+
 export const Footer = () => {
   return (
-    <footer className="border-t border-slate-800 py-8 px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-        <span className="text-lg font-bold tracking-[0.15em] bg-linear-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-          S e g m e n t o
-        </span>
-        <p className="text-xs text-slate-600">© {new Date().getFullYear()} Segmento. All rights reserved.</p>
-        <div className="flex items-center gap-4">
+    <footer className="border-t border-line">
+      <div className="border-b border-line">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+          <img
+            src="/brand/czechinvest.png"
+            alt="CzechInvest"
+            className="h-8 shrink-0"
+          />
+          <p className="text-sm text-mute leading-relaxed text-center sm:text-left">
+            This project was carried out with financial support from the Technology Incubation programme of
+            the CzechInvest agency.
+          </p>
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <Logo className="h-[18px]" />
+        <p className="font-mono text-[11px] text-dim">© {new Date().getFullYear()} Segmento. All rights reserved.</p>
+        <div className="flex items-center gap-5">
           <a
             href="https://x.com/SegmentoAI"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-slate-500 hover:text-slate-300 transition-colors"
+            className="text-mute hover:text-paper transition-colors"
             aria-label="X (Twitter)"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -20,7 +33,7 @@ export const Footer = () => {
           </a>
           <a
             href="mailto:marek@carmine.finance"
-            className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
+            className="font-mono text-[11px] text-mute hover:text-paper transition-colors"
           >
             marek@carmine.finance
           </a>

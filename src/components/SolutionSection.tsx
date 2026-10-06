@@ -1,3 +1,5 @@
+import { SectionLabel } from "./ui";
+
 const STEPS = [
   {
     num: "01",
@@ -33,41 +35,33 @@ const STEPS = [
 
 export const SolutionSection = () => {
   return (
-    <section id="flywheel" className="py-24 px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-300 mb-4">
-            The process
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-50 leading-tight mb-4">
-            Turn marketing into a{" "}
-            <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-              self-propelling flywheel
-            </span>
+    <section id="flywheel" className="py-28 border-b border-line">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-16">
+        <div className="lg:sticky lg:top-28 self-start">
+          <SectionLabel index="02">The process</SectionLabel>
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-[-0.025em] text-paper leading-[1.05] mb-5">
+            Turn marketing into a <span className="text-accent">self-propelling flywheel</span>
           </h2>
-          <p className="text-slate-500 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-mute text-lg leading-relaxed">
             Budget is tied to results. Final spend is capped at half of fees collected — campaign can fully pay for
             itself.
           </p>
         </div>
-        <div className="max-w-2xl mx-auto divide-y divide-slate-800">
+        <ol className="border-l border-line">
           {STEPS.map((step) => (
-            <div key={step.num} className="flex gap-6 py-7">
-              <div className="flex-shrink-0 w-11 h-11 rounded-full bg-gradient-to-br from-blue-900 to-indigo-900 border border-slate-700 flex items-center justify-center text-sm font-bold text-blue-300">
-                {step.num}
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-200 mb-2">{step.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
-                {step.note && (
-                  <span className="inline-block mt-3 text-xs text-emerald-300 border border-emerald-900 bg-emerald-950/40 px-3 py-1 rounded-full">
-                    {step.note}
-                  </span>
-                )}
-              </div>
-            </div>
+            <li key={step.num} className="relative pl-10 pb-12 last:pb-0">
+              <span className="absolute -left-[5px] top-1.5 w-[9px] h-[9px] rounded-full bg-ink border border-accent" />
+              <div className="font-mono text-xs text-accent mb-2">{step.num}</div>
+              <h3 className="text-xl font-medium text-paper mb-2">{step.title}</h3>
+              <p className="text-sm text-mute leading-relaxed max-w-lg">{step.desc}</p>
+              {step.note && (
+                <span className="inline-block mt-4 font-mono text-[11px] uppercase tracking-wider text-ink bg-accent px-3 py-1 rounded">
+                  {step.note}
+                </span>
+              )}
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

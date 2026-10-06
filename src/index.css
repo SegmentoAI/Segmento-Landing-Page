@@ -2,12 +2,45 @@
 @import 'tailwindcss';
 /* DO NOT DELETE THIS TAILWIND IMPORT, OTHERWISE THE STYLING WILL NOT RENDER AT ALL */
 
+@theme {
+  --font-sans: "Inter Tight", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink: #0c0d0f;
+  --color-ink-2: #111215;
+  --color-ink-3: #17181c;
+  --color-paper: #f2f2ef;
+  --color-mute: #8a8b90;
+  --color-dim: #55565c;
+  --color-line: rgb(242 242 239 / 0.08);
+  --color-line-2: rgb(242 242 239 / 0.16);
+  --color-accent: #9c7bfa;
+  --color-accent-soft: rgb(156 123 250 / 0.12);
+}
+
 :root {
   color-scheme: dark;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* faint dotted grid used behind hero / CTA */
+.bg-grid {
+  background-image: radial-gradient(rgb(242 242 239 / 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 @media print {
