@@ -77,6 +77,8 @@ export const TeamSection = () => {
               </div>
             </div>
           ))}
+          {/* fills the empty 4th cell of the 2-col layout so the grid background doesn't show */}
+          <div className="hidden sm:block lg:hidden bg-ink" />
         </div>
       </div>
     </section>

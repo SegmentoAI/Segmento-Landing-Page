@@ -8,7 +8,7 @@ function ChatMsg({ from, text }: { from: "them" | "us"; text: string }) {
       <div
         className={`px-4 py-2 rounded-lg text-sm leading-snug ${
           from === "them"
-            ? "bg-ink-3 text-paper/80 rounded-bl-sm"
+            ? "bg-accent-soft text-paper/80 rounded-bl-sm"
             : "bg-accent text-ink font-medium rounded-br-sm"
         }`}
       >
