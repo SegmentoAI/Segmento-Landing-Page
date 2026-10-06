@@ -1,22 +1,24 @@
 import type { ReactNode } from "react";
 
-const wordmarkMask = {
-  maskImage: "url(/brand/wordmark.png)",
-  WebkitMaskImage: "url(/brand/wordmark.png)",
-  maskSize: "100% 100%",
-  WebkitMaskSize: "100% 100%",
-};
-
-// "segmento" wordmark split horizontally like the S mark
-export const SplitWordmark = ({ className = "h-[22px]" }: { className?: string }) => (
-  <span role="img" aria-label="segmento" className={`relative inline-block aspect-[640/119] ${className}`}>
-    <span className="absolute inset-0 bg-paper [clip-path:inset(0_0_58%_0)]" style={wordmarkMask} />
-    <span className="absolute inset-0 bg-paper [clip-path:inset(52%_0_0_0)]" style={wordmarkMask} />
+// "segmento" wordmark: two stacked copies, top keeps 0–60% of the line box, bottom keeps 64–100%,
+// leaving an empty 0.04em gap. Side/outer insets are negative so glyph overhang (g descender) isn't cut.
+export const SplitWordmark = ({ className = "text-2xl" }: { className?: string }) => (
+  <span
+    role="img"
+    aria-label="segmento"
+    className={`relative inline-block font-[Geist] font-semibold tracking-[-0.04em] leading-none ${className}`}
+  >
+    <span aria-hidden className="block [clip-path:inset(-0.5em_-0.2em_40%_-0.2em)]">
+      segmento
+    </span>
+    <span aria-hidden className="absolute inset-0 [clip-path:inset(64%_-0.2em_-0.5em_-0.2em)]">
+      segmento
+    </span>
   </span>
 );
 
-export const Logo = ({ className = "h-[22px]" }: { className?: string }) => (
-  <a href="/" className="flex items-center shrink-0" aria-label="Segmento">
+export const Logo = ({ className = "text-2xl" }: { className?: string }) => (
+  <a href="/" className="flex items-center shrink-0 text-paper" aria-label="Segmento">
     <SplitWordmark className={className} />
   </a>
 );

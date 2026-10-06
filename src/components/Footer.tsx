@@ -17,7 +17,7 @@ export const Footer = () => {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10 flex flex-col sm:flex-row justify-between items-center gap-6">
-        <Logo className="h-[18px]" />
+        <Logo className="text-xl" />
         <p className="font-mono text-[11px] text-dim">© {new Date().getFullYear()} Segmento. All rights reserved.</p>
         <div className="flex items-center gap-5">
           <a
